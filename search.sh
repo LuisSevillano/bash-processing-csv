@@ -12,11 +12,9 @@ if [ $# -eq 4 ]; then
   if [ ! -d "$DIR" ]; then
     mkdir $DIR # creates the folder
     mkdir $DIR/temp
-    head -n 1 counties.csv > $DIR/temp/headers
     # awk lets us make complex searches
     awk -v pat1="$COLUMN" -v pat2="$SEARCH" -F ',' 'BEGIN{IGNORECASE=1} $pat1 ~ pat2' $FILE > $DIR/temp/temp.csv
-    # example
-    head -n 1 counties.csv > $DIR/temp/headers
+    head -n 1 $FILE > $DIR/temp/headers
     
     # save first row of csv filtered to check if needs the original csv headers
     head -n 1 $DIR/temp/temp.csv > $DIR/temp/first_row
